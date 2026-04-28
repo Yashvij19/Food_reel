@@ -1,0 +1,27 @@
+# Development overrides
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+version: '3.8'
+
+services:
+  postgres:
+    ports:
+      - "5432:5432"
+
+  redis:
+    ports:
+      - "6379:6379"
+
+  # Don't run api/web in docker for development
+  # We run them locally with hot reload
+  api:
+    profiles:
+      - donotstart
+
+  web:
+    profiles:
+      - donotstart
+
+  nginx:
+    profiles:
+      - donotstart
